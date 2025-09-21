@@ -16,6 +16,7 @@ app.use(express.json());
 
 require("./routes/students")(router);
 require("./routes/school")(router);
+require("./routes/scert")(router);
 
 
 

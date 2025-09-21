@@ -2,7 +2,7 @@ const bcrypt = require("bcrypt");
 
 const jwt = require("jsonwebtoken");
 
-const { PrismaClient } = require("../../generated/prisma");
+const prisma = require("../../prismaClient");
 
 const USER_TYPE = require("../../enums/userType");
 
@@ -13,13 +13,12 @@ const {
   JWT_EXPIRES_IN,
 } = process.env;
 
-const prisma = new PrismaClient();
 
 const signup = async (req, res) => {
   try {
     const { name, email, password, schoolId } = req.body;
 
-    if (!name || !email || !password || !schoolId) {
+    if (!name || !email || !password ) {
       return res.status(400).json({ message: "All fields are required" });
     }
 

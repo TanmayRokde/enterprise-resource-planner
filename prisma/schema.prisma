@@ -32,4 +32,14 @@ model User {
   school   School?     @relation(fields: [schoolId], references: [id])
 }
 
+model Scholarships {
+  id       Int     @id @default(autoincrement())
+  name     String  @unique
+  formFormat Json
+  lastDate DateTime?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  isActive Boolean
+}
+
 
