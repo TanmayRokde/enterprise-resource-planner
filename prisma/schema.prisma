@@ -16,30 +16,47 @@ datasource db {
 
 
 model School {
-  id    Int    @id @default(autoincrement())
-  name  String
+  id      Int     @id @default(autoincrement())
+  name    String
   address String
-  users User[] 
+  users   User[] 
 }
 
 model User {
-  id       Int     @id @default(autoincrement())
-  email    String  @unique
-  name     String?
-  userType Int
-  password String
-  schoolId Int?        
-  school   School?     @relation(fields: [schoolId], references: [id])
+  id        Int       @id @default(autoincrement())
+  email     String    @unique
+  name      String?
+  userType  Int
+  password  String
+  schoolId  Int?        
+  school    School?   @relation(fields: [schoolId], references: [id])
+  forms     studentFormData[]  
 }
 
 model Scholarships {
-  id       Int     @id @default(autoincrement())
-  name     String  @unique
+  id         Int               @id @default(autoincrement())
+  name       String            @unique
   formFormat Json
-  lastDate DateTime?
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-  isActive Boolean
+  lastDate   DateTime?
+  createdAt  DateTime          @default(now())
+  updatedAt  DateTime          @updatedAt
+  isActive   Boolean
+  forms      studentFormData[] 
 }
 
+model studentFormData {
+  id             Int          @id @default(autoincrement())
+  userId         Int
+  scholarshipId  Int
+  data           Json
+  isDraft        Boolean @default(true)
+  schoolStatus   Int
+  beoStatus      Int?
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+
+
+  user           User          @relation(fields: [userId], references: [id])
+  scholarship    Scholarships  @relation(fields: [scholarshipId], references: [id])
+}
 
