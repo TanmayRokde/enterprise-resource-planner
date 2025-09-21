@@ -58,5 +58,7 @@ model studentFormData {
 
   user           User          @relation(fields: [userId], references: [id])
   scholarship    Scholarships  @relation(fields: [scholarshipId], references: [id])
+
+  @@unique([userId, scholarshipId])
 }
 

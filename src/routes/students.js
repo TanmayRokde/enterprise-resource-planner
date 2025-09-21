@@ -8,5 +8,8 @@ module.exports = function (router) {
 
   router.post("/student/login", auth.login);
 
-  router.post("/student/submit-form",authenticateSTUDENT,scholarships.createStudentForm)
+  router.post("/student/submit-form", authenticateSTUDENT, scholarships.createStudentForm);
+  
+  router.post("/student/edit-form", authenticateSTUDENT, scholarships.editStudentForm);
+  
 };
